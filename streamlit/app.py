@@ -1,19 +1,17 @@
-import pandas as pd
-import numpy as np
 import math
-import torch, torch.nn as nn
-
-import streamlit as st
-import os
-import SessionState
-from fsplit.filesplit import Filesplit
-
 import requests
 import json
+import streamlit as st
+import numpy as np
+import pandas as pd
+import torch, torch.nn as nn
+from fsplit.filesplit import Filesplit
+import os
+import SessionState
 
 fs = Filesplit()
 
-st.set_page_config(page_title='Formula 1 Lap Predictions', page_icon=None, layout='centered', initial_sidebar_state='auto')
+st.set_page_config(page_title='F1 Laps with ML', page_icon=None, layout='centered', initial_sidebar_state='auto')
 
 db_dir = './data/'
 #if not os.path.exists('./model_sd.pth'):
@@ -21,7 +19,7 @@ db_dir = './data/'
 if not os.path.exists('./model_sd_3.pth'):
     fs.merge(input_dir="./filesplit",output_file="./model_sd_3.pth", cleanup=False)
 
-def making_streamlit():
+def main():
 
     session_state = SessionState.get(user_name='', model=0, record=[], circuitName='', circuitLoc='', year='', round='', graph=None)
 
@@ -33,9 +31,9 @@ def making_streamlit():
     model.eval()
 
     years = range(2001, 2022)
-    st.sidebar.title("Model Parameters")
+    st.sidebar.title("Model Input")
     year = st.sidebar.selectbox("Season", years, index=20)
-    grand_prix = st.sidebar.number_input("Round", min_value=1, step=1)
+    _round = st.sidebar.number_input("Round", min_value=1, step=1)
     if (year < 2021):
         qualifying = st.sidebar.checkbox("Qualifying")
         if (not qualifying):
@@ -44,11 +42,19 @@ def making_streamlit():
             laps = 1
     else:
         laps = 1
-    pred_laps = st.sidebar.number_input("Total number of laps", min_value=1, max_value=200, value=50, step=1, help='Some races will have different number of laps.')
-    predict = st.sidebar.button("Race Predictions")
-    st.sidebar.markdown('Learn more about this web app [here](https://github.com/gregoryhhan/formula1_capstone).')
+    pred_laps = st.sidebar.number_input("Total number of laps", min_value=1, max_value=200, value=50, step=1, help='The model will predict up to this many laps.')
+    randomness = st.sidebar.slider("Randomness factor", min_value=0, max_value=100, value=0, step=1)
+    model_selection = st.sidebar.selectbox('Model selection', index=0,
+    options=['Regular','Optimized for Pit Stop Prediction (Not available)'],
+    help='Regular: Trained with data from 2001 to 2020\n\n Optimized for Pit Stop Prediction: Trained with data from 2012 to 2020 (Not available due to size limitations.)')
+    if (model_selection == 'Regular'):
+        session_state.model = 0
+    elif (model_selection == 'Optimized for Pit Stop Prediction'):
+        session_state.model = 1
+    predict = st.sidebar.button("Predict")
+    st.sidebar.markdown('Learn more about this web app [here](https://github.com/Jared-Chan/f1ml).')
 
-    st.title('Formula 1 Lap-by-lab Predictions')
+    st.title('Formula One Race Lap-by-Lap Prediction with Machine Learning')
     st.markdown('***')
 
     probar = st.empty()
@@ -101,9 +107,9 @@ def making_streamlit():
         st.subheader(f'{session_state.circuitName}, {session_state.circuitLoc}')
     lap_num = st.slider("Lap Number", min_value=1, max_value=pred_laps, step=1, value=1)
     if (lap_num <= laps):
-        st.text("Lap 1 Position")
+        st.text("From database")
     else:
-        st.text("Lap # Position")
+        st.text("Prediction")
 
     if (len(session_state.record) > 0):
         if (lap_num >= len(session_state.record)):
@@ -116,19 +122,19 @@ def making_streamlit():
 
 
 @st.cache
-def time_to_int(time):
-  if (time == float):
-    return time
-  time_str = str(time)
-  time_series = time_str.rsplit(':')
-  if ('\\N' in time_str):
+def time_to_int(t):
+  if (t == float):
+    return t
+  t2 = str(t)
+  ts = t2.rsplit(':')
+  if ('\\N' in t2):
     return None
-  if (not '.' in time_str):
+  if (not '.' in t2):
     return None
-  if (len(time_series) > 1):
-    return int(time_series[0]) * 60 + float(time_series[1])
+  if (len(ts) > 1):
+    return int(ts[0]) * 60 + float(ts[1])
   else:
-    return float(time_series[0])
+    return float(ts[0])
 
 races = pd.read_csv(db_dir + 'races.csv')
 circuits = pd.read_csv(db_dir + 'circuits.csv')
@@ -438,7 +444,7 @@ def get_times(year, _round, lap):
 
 @st.cache(allow_output_mutation=True)
 def position_analysis(lap_in, out, num_of_laps=1, line_chart={}):
-  df = pd.DataFrame(columns=['code', 'driver', 'position', 'status', 'laptime'])
+  df = pd.DataFrame(columns=['code', 'driver', 'position', 'laps till pitting', 'status', 'laptime'])
   _lap = lap_in.detach().clone().numpy()
   _o = out.detach().clone().numpy()
   _name, _loc, _country = circuit_info(np.argmax(_lap[:130]))
@@ -472,7 +478,7 @@ def position_analysis(lap_in, out, num_of_laps=1, line_chart={}):
         'code': f'{_code}',
         'driver': f'{_fn} {_ln}',
         'position': int(_pos),
-        #'laps till pitting': _pitting,
+        'laps till pitting': _pitting,
         'status': _status,
         'laptime': _time
     }, ignore_index=True)
@@ -523,4 +529,4 @@ class RacePredictionModel(nn.Module):
         return outs, next_states
 
 if __name__ == '__main__':
-    making_streamlit()
+    main()
