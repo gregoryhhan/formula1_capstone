@@ -32,7 +32,7 @@ def main():
 
     years = range(2001, 2021)
     st.sidebar.title("Model Input")
-    year = st.sidebar.selectbox("Season", years, index=20)
+    year = st.sidebar.selectbox("Season", years, index=19)
     _round = st.sidebar.number_input("Round", min_value=1, step=1)
     if (year < 2021):
         qualifying = st.sidebar.checkbox("Qualifying")
