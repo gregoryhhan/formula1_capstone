@@ -10,6 +10,7 @@ import SessionState
 import requests
 import json
 
+fs = Filesplit()
 
 st.set_page_config(page_title='Formula 1 Lap Predictions', page_icon=None, layout='centered', initial_sidebar_state='auto')
 
