@@ -44,11 +44,6 @@ def main():
     else:
         laps = 1
     pred_laps = st.sidebar.number_input("Total number of laps", min_value=1, max_value=200, value=50, step=1, help='The model will predict up to this many laps.')
-    help='Regular: Trained with data from 2001 to 2020\n\n Optimized for Pit Stop Prediction: Trained with data from 2012 to 2020 (Not available due to size limitations.)')
-    if (model_selection == 'Regular'):
-        session_state.model = 0
-    elif (model_selection == 'Optimized for Pit Stop Prediction'):
-        session_state.model = 1
     predict = st.sidebar.button("Predict")
     st.sidebar.markdown('Learn more about this web app [here](https://github.com/Jared-Chan/f1ml).')
 
