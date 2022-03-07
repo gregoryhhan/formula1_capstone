@@ -15,7 +15,7 @@ fs = Filesplit()
 
 st.set_page_config(page_title='Formula 1 Lap Predictions', page_icon=None, layout='centered', initial_sidebar_state='auto')
 
-db_dir = './formula1_capstone/'
+db_dir = './formula1_capstone/data/'
 #if not os.path.exists('./model_sd.pth'):
 #    fs.merge(input_dir="./db/models/model_split",output_file="./model_sd.pth", cleanup=False)
 if not os.path.exists('./model_sd_47.pth'):
