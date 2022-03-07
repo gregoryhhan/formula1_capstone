@@ -13,6 +13,12 @@ import json
 
 st.set_page_config(page_title='Formula 1 Lap Predictions', page_icon=None, layout='centered', initial_sidebar_state='auto')
 
+db_dir = './formula1_capstone/'
+#if not os.path.exists('./model_sd.pth'):
+#    fs.merge(input_dir="./db/models/model_split",output_file="./model_sd.pth", cleanup=False)
+if not os.path.exists('./model_sd_47.pth'):
+    fs.merge(input_dir="./filesplit",output_file="./model_sd_3.pth", cleanup=False)
+
 def making_streamlit():
 
     session_state = SessionState.get(user_name='', model=0, record=[], circuitName='', circuitLoc='', year='', round='', graph=None)
@@ -126,7 +132,7 @@ def time_to_int(time):
   else:
     return float(time_series[0])
 
-races = pd.read_csv(directory + 'races.csv')
+races = pd.read_csv(db_dir + 'races.csv')
 circuits = pd.read_csv(db_dir + 'circuits.csv')
 drivers = pd.read_csv(db_dir + 'drivers.csv')
 constructor = pd.read_csv(db_dir + 'constructors.csv')
