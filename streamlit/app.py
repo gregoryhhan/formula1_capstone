@@ -44,7 +44,7 @@ def making_streamlit():
             laps = 1
     else:
         laps = 1
-    pred_laps = st.sidebar.number_input("Total number of laps", min_value=1, max_value=100, value=50, step=1, help='Some races will have different number of laps.')
+    pred_laps = st.sidebar.number_input("Total number of laps", min_value=1, max_value=200, value=50, step=1, help='Some races will have different number of laps.')
     predict = st.sidebar.button("Race Predictions")
     st.sidebar.markdown('Learn more about this web app [here](https://github.com/gregoryhhan/formula1_capstone).')
 
