@@ -44,8 +44,8 @@ def main():
     else:
         laps = 1
     pred_laps = st.sidebar.number_input("Total number of laps", min_value=1, max_value=200, value=50, step=1, help='The model will predict up to this many laps.')
-    predict = st.sidebar.button("Predict")
-    st.sidebar.markdown('Learn more about this web app [here](https://github.com/Jared-Chan/f1ml).')
+    predict = st.sidebar.button("Race Predictions")
+    st.sidebar.markdown('Learn more about this web app [here](https://github.com/gregoryhhan/formula1_capstone).')
 
     st.title('Formula One Race Lap-by-Lap Prediction with Machine Learning')
     st.markdown('***')
