@@ -34,7 +34,7 @@ def main():
     years = range(2001, 2021)
     st.sidebar.title("Model Parameters")
     year = st.sidebar.selectbox("Season", years, index=19)
-    _round = st.sidebar.number_input("Round", min_value=1, step=1)
+    _round = st.sidebar.number_input("Grand Prix #", min_value=1, step=1)
     if (year < 2021):
         qualifying = st.sidebar.checkbox("Qualifying")
         if (not qualifying):
