@@ -27,13 +27,13 @@ def making_streamlit():
 
     model = RacePredictionModel(4051, 1200, 1200, 2, 0.2)
     if (session_state.model == 0):
-        model.load_state_dict(torch.load('./data/loss_folder/3-5-loss-0.06.pth',map_location=torch.device('cpu')))
+        model.load_state_dict(torch.load('./filesplit/3-5-loss-0.06.pth',map_location=torch.device('cpu')))
     else:
-        model.load_state_dict(torch.load('./data/loss_folder/3-5-loss-0.06.pth',map_location=torch.device('cpu')))
+        model.load_state_dict(torch.load('./filesplit/3-5-loss-0.06.pth',map_location=torch.device('cpu')))
     if (session_state.model == 0):
         model.load_state_dict(torch.load('./model_sd.pth',map_location=torch.device('cpu')))
     else:
-        model.load_state_dict(torch.load('./model_sd_47.pth',map_location=torch.device('cpu')))
+        model.load_state_dict(torch.load('./model_sd_3.pth',map_location=torch.device('cpu')))
     model.eval()
 
     years = range(2001, 2022)
