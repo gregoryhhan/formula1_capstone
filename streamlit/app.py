@@ -18,7 +18,7 @@ st.set_page_config(page_title='Formula 1 Lap Predictions', page_icon=None, layou
 db_dir = './data/'
 #if not os.path.exists('./model_sd.pth'):
 #    fs.merge(input_dir="./db/models/model_split",output_file="./model_sd.pth", cleanup=False)
-if not os.path.exists('./model_sd_47.pth'):
+if not os.path.exists('./model_sd_3.pth'):
     fs.merge(input_dir="./filesplit",output_file="./model_sd_3.pth", cleanup=False)
 
 def making_streamlit():
@@ -27,11 +27,7 @@ def making_streamlit():
 
     model = RacePredictionModel(4051, 1200, 1200, 2, 0.2)
     if (session_state.model == 0):
-        model.load_state_dict(torch.load('./filesplit/3-5-loss-0.06.pth',map_location=torch.device('cpu')))
-    else:
-        model.load_state_dict(torch.load('./filesplit/3-5-loss-0.06.pth',map_location=torch.device('cpu')))
-    if (session_state.model == 0):
-        model.load_state_dict(torch.load('./model_sd.pth',map_location=torch.device('cpu')))
+        model.load_state_dict(torch.load('./model_sd_3.pth',map_location=torch.device('cpu')))
     else:
         model.load_state_dict(torch.load('./model_sd_3.pth',map_location=torch.device('cpu')))
     model.eval()
