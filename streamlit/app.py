@@ -42,7 +42,7 @@ def making_streamlit():
         laps = 1
     pred_laps = st.sidebar.number_input("Total number of laps", min_value=1, max_value=100, value=50, step=1, help='Some races will have different number of laps.')
     predict = st.sidebar.button("Race Predictions")
-    st.sidebar.markdown('Learn more about this web app [here](https://github.com/gregoryhhan/capstone_project).')
+    st.sidebar.markdown('Learn more about this web app [here](https://github.com/gregoryhhan/formula1_capstone).')
 
     st.title('Formula 1 Lap-by-lab Predictions')
     st.markdown('***')
@@ -126,11 +126,11 @@ def time_to_int(time):
   else:
     return float(time_series[0])
 
-races = pd.read_csv('/data/races.csv')
-circuits = pd.read_csv('data/circuits.csv')
-drivers = pd.read_csv('data/drivers.csv')
-constructor = pd.read_csv('data/constructors.csv')
-status = pd.read_csv('data/status.csv')
+races = pd.read_csv(db_dir + 'races.csv')
+circuits = pd.read_csv(db_dir + 'circuits.csv')
+drivers = pd.read_csv(db_dir + 'drivers.csv')
+constructor = pd.read_csv(db_dir + 'constructors.csv')
+status = pd.read_csv(db_dir + 'status.csv')
 
 @st.cache
 def race_info(raceId):
@@ -219,7 +219,7 @@ def stat_unbed(array, retired=False):
   elif (_i == 5):
     return 'Spun off'
   else:
-    return 'Something is wrong'
+    return 'something is wrong'
 
 @st.cache
 def lt_embed(laptime):
@@ -258,7 +258,7 @@ def lt_unbed(l_array):
   _ret += np.argmax(l_array[22:32]) * 0.1
   return _ret
 
-drivers_short = pd.read_csv('data/drivers_short.csv')
+drivers_short = pd.read_csv(db_dir + 'drivers_short.csv')
 # from driverId to our id
 @st.cache
 def driver_embed_idx(driverId):
@@ -288,8 +288,8 @@ def driver_unbed(d_array):
 @st.cache(suppress_st_warning=True)
 def get_times(year, _round, lap):
   if (year <= 2020):
-    race = np.load(f'/races_npy/{year}/{_round-1}_in.npy')
-    race_out = np.load(f'/races_npy/{year}/{_round-1}_exp.npy')
+    race = np.load(db_dir + f'/races_npy/{year}/{_round-1}_in.npy')
+    race_out = np.load(db_dir + f'/races_npy/{year}/{_round-1}_exp.npy')
     if (lap >= len(race)):
         return race, race_out
     race = race[:lap]
@@ -297,7 +297,7 @@ def get_times(year, _round, lap):
     return race, race_out
   else:
 
-    if not os.path.exists(f'/cache/{year}_{_round}_q.json'):
+    if not os.path.exists(db_dir + f'/cache/{year}_{_round}_q.json'):
         quali = requests.get(f'http://ergast.com/api/f1/{year}/{_round}/qualifying.json')
         if (quali.status_code < 200):
           return [], []
@@ -330,19 +330,19 @@ def get_times(year, _round, lap):
               return [], []
 
         if (len(j['MRData']['RaceTable']['Races']) != 0):
-            with open(f'cache/{year}_{_round}_q.json', 'w') as f:
+            with open(db_dir + f'cache/{year}_{_round}_q.json', 'w') as f:
                 json.dump(j, f)
-            with open(f'cache/{year}_{_round}_ds.json', 'w') as f:
+            with open(db_dir + f'cache/{year}_{_round}_ds.json', 'w') as f:
                 json.dump(d_s, f)
-            with open(f'cache/{year}_{_round}_cs.json', 'w') as f:
+            with open(db_dir + f'cache/{year}_{_round}_cs.json', 'w') as f:
                 json.dump(c_s, f)
     else:
-        with open(f'cache/{year}_{_round}_q.json', 'r') as f:
+        with open(db_dir + f'cache/{year}_{_round}_q.json', 'r') as f:
             j = json.load(f)
-        with open(f'cache/{year}_{_round}_ds.json', 'r') as f:
+        with open(db_dir + f'cache/{year}_{_round}_ds.json', 'r') as f:
             d_s = json.load(f)
             ds_ok = True
-        with open(f'cache/{year}_{_round}_cs.json', 'r') as f:
+        with open(db_dir + f'cache/{year}_{_round}_cs.json', 'r') as f:
             c_s = json.load(f)
             cs_ok = True
 
@@ -518,5 +518,5 @@ class RacePredictionModel(nn.Module):
         outs = self.fc(lstm_outs)
         return outs, next_states
 
-if __name__ == '__making_streamlit__':
-    making_streamlit()
+if __name__ == '__main__':
+    main()
