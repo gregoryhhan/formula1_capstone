@@ -95,7 +95,7 @@ def main():
     if (session_state.year):
         st.subheader(f'{session_state.year} Round {session_state.round}')
     else:
-        st.subheader('Please configure model input from the sidebar.')
+        st.subheader('Select Model Parameters in Sidebar.')
     if (len(session_state.circuitName) > 0):
         st.subheader(f'{session_state.circuitName}, {session_state.circuitLoc}')
     lap_num = st.slider("Lap Number", min_value=1, max_value=pred_laps, step=1, value=1)
