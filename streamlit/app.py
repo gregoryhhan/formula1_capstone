@@ -18,7 +18,6 @@ def making_streamlit():
     session_state = SessionState.get(user_name='', model=0, record=[], circuitName='', circuitLoc='', year='', round='', graph=None)
 
     model = RacePredictionModel(4051, 1200, 1200, 2, 0.2)
-<<<<<<< HEAD
     if (session_state.model == 0):
         model.load_state_dict(torch.load('./data/loss_folder/3-5-loss-0.06.pth',map_location=torch.device('cpu')))
     else:
