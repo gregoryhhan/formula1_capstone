@@ -100,9 +100,9 @@ def main():
         st.subheader(f'{session_state.circuitName}, {session_state.circuitLoc}')
     lap_num = st.slider("Lap Number", min_value=1, max_value=pred_laps, step=1, value=1)
     if (lap_num <= laps):
-        st.text("From database")
+        st.text("Lap 1 Position")
     else:
-        st.text("Prediction")
+        st.text("Lap # Position")
 
     if (len(session_state.record) > 0):
         if (lap_num >= len(session_state.record)):
