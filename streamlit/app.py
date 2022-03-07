@@ -11,7 +11,7 @@ import SessionState
 
 fs = Filesplit()
 
-st.set_page_config(page_title='F1 Laps with ML', page_icon=None, layout='centered', initial_sidebar_state='auto')
+st.set_page_config(page_title='Formula 1 Lap Predictions', page_icon=None, layout='centered', initial_sidebar_state='auto')
 
 db_dir = './data/'
 #if not os.path.exists('./model_sd.pth'):
@@ -30,7 +30,7 @@ def main():
         model.load_state_dict(torch.load('./model_sd_3.pth',map_location=torch.device('cpu')))
     model.eval()
 
-    years = range(2001, 2022)
+    years = range(2001, 2021)
     st.sidebar.title("Model Input")
     year = st.sidebar.selectbox("Season", years, index=20)
     _round = st.sidebar.number_input("Round", min_value=1, step=1)
