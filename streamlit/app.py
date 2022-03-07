@@ -437,7 +437,7 @@ def get_times(year, _round, lap):
 
 @st.cache(allow_output_mutation=True)
 def position_analysis(lap_in, out, num_of_laps=1, line_chart={}):
-  df = pd.DataFrame(columns=['code', 'driver', 'position', 'laps till pitting', 'status', 'laptime'])
+  df = pd.DataFrame(columns=['code', 'driver', 'position', 'status', 'laptime'])
   _lap = lap_in.detach().clone().numpy()
   _o = out.detach().clone().numpy()
   _name, _loc, _country = circuit_info(np.argmax(_lap[:130]))
@@ -471,7 +471,6 @@ def position_analysis(lap_in, out, num_of_laps=1, line_chart={}):
         'code': f'{_code}',
         'driver': f'{_fn} {_ln}',
         'position': int(_pos),
-        'laps till pitting': _pitting,
         'status': _status,
         'laptime': _time
     }, ignore_index=True)
