@@ -5,7 +5,7 @@ import torch, torch.nn as nn
 
 import streamlit as st
 import os
-#import SessionState
+import SessionState
 
 import requests
 import json
@@ -15,7 +15,7 @@ st.set_page_config(page_title='Formula 1 Lap Predictions', page_icon=None, layou
 
 def making_streamlit():
 
-    #session_state = SessionState.get(user_name='', model=0, record=[], circuitName='', circuitLoc='', year='', round='', graph=None)
+    session_state = SessionState.get(user_name='', model=0, record=[], circuitName='', circuitLoc='', year='', round='', graph=None)
 
     model = RacePredictionModel(4051, 1200, 1200, 2, 0.2)
 <<<<<<< HEAD
@@ -24,11 +24,11 @@ def making_streamlit():
     else:
         model.load_state_dict(torch.load('./data/loss_folder/3-5-loss-0.06.pth',map_location=torch.device('cpu')))
 =======
-    #if (session_state.model == 0):
-        #model.load_state_dict(torch.load('./model_sd.pth',map_location=torch.device('cpu')))
+    if (session_state.model == 0):
+        model.load_state_dict(torch.load('./model_sd.pth',map_location=torch.device('cpu')))
     model.load_state_dict(torch.load('./model_sd_47.pth',map_location=torch.device('cpu')))
-    #else:
-        #model.load_state_dict(torch.load('./model_sd_47.pth',map_location=torch.device('cpu')))
+    else:
+        model.load_state_dict(torch.load('./model_sd_47.pth',map_location=torch.device('cpu')))
 >>>>>>> a4ef455e3188d5a3fc0b8b8651a720f2e54e08d4
     model.eval()
 
