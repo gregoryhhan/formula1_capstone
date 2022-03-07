@@ -74,7 +74,7 @@ def main():
         probar.progress(0.2)
         for i in range(0, pred_laps):
             if (not (len(exp) == 0 and i == 0)):
-                _in = out_to_in(_in, out.squeeze().squeeze(), True, pred_laps, randomness)
+                _in = out_to_in(_in, out.squeeze().squeeze(), True, pred_laps)
             with torch.no_grad():
                 out, states = model(_in.unsqueeze(0).unsqueeze(0).float(), states)
             out = out.squeeze().squeeze()
