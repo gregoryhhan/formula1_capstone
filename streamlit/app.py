@@ -527,4 +527,4 @@ class RacePredictionModel(nn.Module):
         return outs, next_states
 
 if __name__ == '__main__':
-    main()
+    making_streamlit()
