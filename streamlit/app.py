@@ -1,14 +1,15 @@
-import math
-import requests
-import json
-import streamlit as st
-import numpy as np
 import pandas as pd
+import numpy as np
+import math
 import torch, torch.nn as nn
-from fsplit.filesplit import Filesplit
+
+import streamlit as st
 import os
 import SessionState
+from fsplit.filesplit import Filesplit
 
+import requests
+import json
 fs = Filesplit()
 
 st.set_page_config(page_title='Formula 1 Lap Predictions', page_icon=None, layout='centered', initial_sidebar_state='auto')
@@ -31,7 +32,7 @@ def main():
     model.eval()
 
     years = range(2001, 2021)
-    st.sidebar.title("Model Input")
+    st.sidebar.title("Model Parameters")
     year = st.sidebar.selectbox("Season", years, index=19)
     _round = st.sidebar.number_input("Round", min_value=1, step=1)
     if (year < 2021):
@@ -43,9 +44,6 @@ def main():
     else:
         laps = 1
     pred_laps = st.sidebar.number_input("Total number of laps", min_value=1, max_value=200, value=50, step=1, help='The model will predict up to this many laps.')
-    randomness = st.sidebar.slider("Randomness factor", min_value=0, max_value=100, value=0, step=1)
-    model_selection = st.sidebar.selectbox('Model selection', index=0,
-    options=['Regular','Optimized for Pit Stop Prediction (Not available)'],
     help='Regular: Trained with data from 2001 to 2020\n\n Optimized for Pit Stop Prediction: Trained with data from 2012 to 2020 (Not available due to size limitations.)')
     if (model_selection == 'Regular'):
         session_state.model = 0
