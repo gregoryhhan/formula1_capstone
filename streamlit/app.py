@@ -145,7 +145,7 @@ def race_info(raceId):
   _circuitId = _r['circuitId'].item()
   return _year, _round, _circuitId
 
-@st.cache
+@st.cache(ttl=24*3600)
 def circuit_info(circuitId):
   _c = circuits.query(f'circuitId  == {circuitId}')
   if (_c.empty):
@@ -155,7 +155,7 @@ def circuit_info(circuitId):
   _country = _c['country'].item()
   return _name, _location, _country
 
-@st.cache
+@st.cache(ttl=24*3600)
 def driver_info(id):
   _d = drivers.query(f'driverId  == {id}')
   if (_d.empty):
@@ -168,7 +168,7 @@ def driver_info(id):
   _nationality = _d['nationality'].item()
   return _number, _code, _forename, _surname, _dob, _nationality
 
-@st.cache
+@st.cache(ttl=24*3600)
 def constructor_info(id):
   _c = constructor.query(f'constructorId  == {id}')
   if (_c.empty):
@@ -177,7 +177,7 @@ def constructor_info(id):
   _nationality = _d['nationality'].item()
   return _name, _nationality
 
-@st.cache
+@st.cache(ttl=24*3600)
 def status_info(id):
   _s = status.query(f'statusId == {id}')
   if (_s.empty):
@@ -193,7 +193,7 @@ stat_emb = [
   [77.0, 73.0, 82.0, 81.0, 62.0, 54.0, 31.0, 96.0], # Other
   [20.0] #'Spun off'
 ]
-@st.cache
+@st.cache(ttl=24*3600)
 def stat_embed(id):
   _emb = np.zeros(6)
   for i in range(6):
@@ -203,7 +203,7 @@ def stat_embed(id):
   _emb[4] = 1
   return _emb # Other
 
-@st.cache
+@st.cache(ttl=24*3600)
 def stat_unbed(array, retired=False):
   _a = np.copy(array)
   if (retired):
@@ -224,7 +224,7 @@ def stat_unbed(array, retired=False):
   else:
     return 'something is wrong'
 
-@st.cache
+@st.cache(ttl=24*3600)
 def lt_embed(laptime):
   # laptime should be a float with 3 decimal places
   _lt = math.floor(laptime * 10)
@@ -247,7 +247,7 @@ def lt_embed(laptime):
     _ret = np.append(_ret, _t)
   return _ret
 
-@st.cache
+@st.cache(ttl=24*3600)
 def lt_unbed(l_array):
   _ret = 0
   if (l_array[0] >= 0.5 and l_array[1] >= 0.5):
@@ -263,7 +263,7 @@ def lt_unbed(l_array):
 
 drivers_short = pd.read_csv(db_dir + 'drivers_short.csv')
 # from driverId to our id
-@st.cache
+@st.cache(ttl=24*3600)
 def driver_embed_idx(driverId):
   row = drivers_short.query(f'driverId == {driverId}').index
   if (row.empty):
@@ -271,24 +271,24 @@ def driver_embed_idx(driverId):
   return row.item() + 1
 
 # from our id to driverId
-@st.cache
+@st.cache(ttl=24*3600)
 def driver_unbed_idx(idx):
   row = drivers_short.iloc[idx-1]
   return row['driverId']
 
 # from our id to array
-@st.cache
+@st.cache(ttl=24*3600)
 def driver_embed(idx):
   _e = np.zeros(130)
   _e[idx-1] = 1
   return _e
 
 # from array to our id
-@st.cache
+@st.cache(ttl=24*3600)
 def driver_unbed(d_array):
   return np.argmax(d_array) + 1
 
-@st.cache(suppress_st_warning=True)
+@st.cache(ttl=24*3600, suppress_st_warning=True)
 def get_times(year, _round, lap):
   if (year <= 2020):
     race = np.load(db_dir + f'/races_npy/{year}/{_round-1}_in.npy')
@@ -435,7 +435,7 @@ def get_times(year, _round, lap):
 
     return np.expand_dims(ret, 0), []
 
-@st.cache(allow_output_mutation=True)
+@st.cache(ttl=24*3600, allow_output_mutation=True)
 def position_analysis(lap_in, out, num_of_laps=1, line_chart={}):
   df = pd.DataFrame(columns=['code', 'driver', 'position', 'status', 'laptime'])
   _lap = lap_in.detach().clone().numpy()
@@ -479,7 +479,7 @@ def position_analysis(lap_in, out, num_of_laps=1, line_chart={}):
   return _name, _loc, _country, df, line_chart
 
 # Returns a tensor with the size of in but content of out
-@st.cache
+@st.cache(ttl=24*3600)
 def out_to_in(in_, out_, random=False, num_of_laps=50, randomness=20):
   _ret = in_.detach().clone().numpy()
   _o = out_.detach().clone().numpy()
