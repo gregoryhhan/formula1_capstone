@@ -522,5 +522,5 @@ class RacePredictionModel(nn.Module):
         outs = self.fc(lstm_outs)
         return outs, next_states
 
-if __name__ == '__main__':
+if __name__ == '__making_streamlit__':
     making_streamlit()
