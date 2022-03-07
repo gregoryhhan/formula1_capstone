@@ -126,7 +126,7 @@ def time_to_int(time):
   else:
     return float(time_series[0])
 
-races = pd.read_csv(db_dir + 'races.csv')
+races = pd.read_csv(directory + 'races.csv')
 circuits = pd.read_csv(db_dir + 'circuits.csv')
 drivers = pd.read_csv(db_dir + 'drivers.csv')
 constructor = pd.read_csv(db_dir + 'constructors.csv')
