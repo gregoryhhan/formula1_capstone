@@ -20,6 +20,7 @@ Pit stop times were available from 2012 onward. There is a disparity between 201
 ### Fastest Lap Times
 
 The fastest lap times remained largely unchanged but with the introduction of the faster V6 turbo hybrid engine in 2014, the seconds for a fastest lap time begin to decrease.
+
 ![fastestlap](https://github.com/gregoryhhan/formula1_capstone/blob/main/images/fastest_laptimes.png)
 
 ### Grid Position to Win
