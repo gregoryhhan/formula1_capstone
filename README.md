@@ -61,10 +61,9 @@ My model can be expanded on using cloud computing to access and analyze the 1.1 
 ├── data
   ├── races_npy 
 ├── images 
+├── filesplit
 ├── races
-├── races_npy 
-├── .gitignore                    
-├── README.md                
+├── .gitignore                                   
 ├── Main Notebook + EDA
 ├── Baseline_Model
 ├── Final_Model
