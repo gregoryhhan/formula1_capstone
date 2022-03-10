@@ -38,6 +38,8 @@ The majority of cars finished the races with no problems but a significant numbe
 
 ## Modelling and Evaluation
 
+I used Google Colab for my modelling to utilize the GPU to run my model. The link to the notebooks can be found below. One thing to take note is that the data was mounted from my Google Drive which cannot be accessed by another user so, you can copy the necessary csv files from the data folder of this repository, add it to a new folder into your Google Drive, and replace my drive with yours when mounting it in the notebook.
+
 For my modelling, I used LSTM (long short term memory) which is a recurrent neural network to use for times series data. It takes information from prior inputs to influence the current inputs and outputs. Similar to a human brain, LSTM would decide which memories would be siginificant to use to make current and future decisions. There are 3 states to LSTM : forget, input, and output. Forget state is when the model decides what parts of the timestamp data to forget or carry over, input state is when new information is added to the model, and the output state which passes the current information to the next timestamp data. Along with LSTM, I used PyTorch which is a frameowrk developed by Facebook as a library for processing tensors in deep learning. One advantage PyTorch has is that it uses a dynamic computational graph (creates scheme for modelling on the fly)  vs. static (creates entire scheme before data can be added).
 
 The baseline model was made using the data from the last 20 years of Formula 1 (2001-2020). The evaluation metric used was RMSPE which is the percentage of error between the predicted values and actual values. The model did not perform well and overfit with an RMSPE of 447%. It might've been because the model did not know what to do for driver ids that numbered over 800+ vs. positions that were numbered from 1-20. 
@@ -72,4 +74,8 @@ My model can be expanded on using cloud computing to access and analyze the 1.1 
 ├── Baseline_Model
 ├── Final_Model
 ├── README.md
-└── streamlit           
+└── streamlit 
+```
+### Links to Google Colab Notebooks
+[Final Notebook](https://colab.research.google.com/drive/12gNChHZ3J0Kv1srlolbN9bzCqiYnrOSU?usp=sharing)
+[FileSplit](https://colab.research.google.com/drive/12nRRpCB650WTeWnnVagb8xd72jTJW3d0?usp=sharing)
