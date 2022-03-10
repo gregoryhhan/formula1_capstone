@@ -45,7 +45,7 @@ The baseline model was made using the data from the last 20 years of Formula 1 (
 I used some feature engineering to scale the data so that my model would be able to more accurately make predictions. I used one hot encoding for driver ids, scaled the lap times into integers based on seconds, and grouped statuses of the cars into 6 groups to make it easier to discern what status a car would be. My model performed pretty well as it returned an RMSPE of 25%. 
 
 Here is a comparison of how my model performed predicting the race results of the 2020 Abu Dhabi races against the actual results. 
-![raceresult]()
+![raceresult](https://github.com/gregoryhhan/formula1_capstone/blob/main/images/abudhabi.png)
 
 There are other considerations to make my model perform better such as track conditions, tire quality, and weather statuses in the future.
 
