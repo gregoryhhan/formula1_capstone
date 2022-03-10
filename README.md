@@ -53,7 +53,7 @@ There are other considerations to make my model perform better such as track con
 
 I also created a webapp through Streamlit which would visualize how my model did when making lap-by-lap predictions. The user would select model parameters such as season year, which number of the grand prix, and how many laps have gone by to see what positions the drivers were currently in.
 
-You can view the app through: [webapp](https://gregoryhhan.wixsite.com/my-site-1)
+You can view the app through: [Formula 1 Race Predictions](https://gregoryhhan.wixsite.com/my-site-1)
 
 ### Conclusion
 
