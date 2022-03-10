@@ -76,7 +76,9 @@ My model can be expanded on using cloud computing to access and analyze the 1.1 
 ├── README.md
 └── streamlit 
 ```
-### Links to Google Colab Notebooks
+### Links to Google Colab Notebooks and Presentation
 [Final Notebook](https://colab.research.google.com/drive/12gNChHZ3J0Kv1srlolbN9bzCqiYnrOSU?usp=sharing)
+
+[Presentation](https://colab.research.google.com/drive/12gNChHZ3J0Kv1srlolbN9bzCqiYnrOSU?usp=sharing)
 
 [FileSplit](https://colab.research.google.com/drive/12nRRpCB650WTeWnnVagb8xd72jTJW3d0?usp=sharing) files split so that it can uploaded to Github
