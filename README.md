@@ -15,6 +15,7 @@ There are many factors that can determine what happens during a race and who wil
 ### Pit Stop Times
 
 Pit stop times were available from 2012 onward. There is a disparity between 2012 to 2014 which might be due to the changes in pit stop regulations reducing the pit entry speed limit from 70mph to 40mph.
+
 ![pitstop](https://github.com/gregoryhhan/formula1_capstone/blob/main/images/pitstop_times.png)
 
 ### Fastest Lap Times
@@ -26,11 +27,13 @@ The fastest lap times remained largely unchanged but with the introduction of th
 ### Grid Position to Win
 
 Usually the drivers who started in the top 5 positions at the start of the race ended up winning the race, but there were races in which the last place driver took first place; those races were attributed to changes of statuses amongst the cars and unpredictable events like weather.
+
 ![gridposition](https://github.com/gregoryhhan/formula1_capstone/blob/main/images/grid_positions.png)
 
 ### Statuses of Cars
 
 The majority of cars finished the races with no problems but a significant number of cars ended up with statuses such as accident or car issues that would dictate whether they finished the race and what place they would come in.
+
 ![status](https://github.com/gregoryhhan/formula1_capstone/blob/main/images/statuses.png)
 
 ## Modelling and Evaluation
