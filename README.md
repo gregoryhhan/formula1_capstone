@@ -64,13 +64,13 @@ My model can be expanded on using cloud computing to access and analyze the 1.1 
 ### Repository Structure
 
 ```
-├── data
-  ├── races_npy 
+├── data                    <- datasets
+  ├── races_npy             <- race data turned into numpy
 ├── images 
 ├── filesplit
 ├── races
 ├── .gitignore                                   
-├── Main Notebook + EDA
+├── Main Notebook + EDA    
 ├── Baseline_Model
 ├── Final_Model
 ├── README.md
