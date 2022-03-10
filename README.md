@@ -8,11 +8,11 @@ The FIA which governs Formula 1 racing has tasked me with creating a model that 
 
 Since the first Formula 1 race in the 1950s, there has been a constant development to develop the fastest cars and pair them with the most capable of drivers. Only the 20 best drivers can sit behind the wheel of a Formula 1 car and race in a number of races across the world to claim a championship. And, with many advancements in technology, Formula 1 has become a data-driven sport. There are countless sensors on the cars, data points generated from every race, and the usage of deep learning models to find the best strategies, forecasts, and decisions to win a race. There are about 750 million data points that are received during a 2-hour race which must be analyzed for something seemingly simple such as deciding which lap to change the tires when it starts to rain. Although, there are some unpredictable events that may occur such as engine failure, those events are rare and as such deep learning models are very efficient to make race predictions [Formula 1 and Machine Learning](https://becominghuman.ai/formula-1-and-machine-learning-62d1f7166c41).
 
-### Data Understanding
+## Data Understanding
 
 There are many factors that can determine what happens during a race and who will eventually become the winner which are included in the dataset I used for my modelling. However, I selected a few that I thought had the biggest influence: laptimes during qualification, pit-stop times, statuses of the cars, and position on the grid when starting the race.
 
-### Modelling and Evaluation
+## Modelling and Evaluation
 
 Based on our analysis of the data, we would recommend honing in on these 4 factors:
 <ul>
@@ -22,6 +22,9 @@ Based on our analysis of the data, we would recommend honing in on these 4 facto
   <li>Health insurance</li>
 </ul>
 
+### Pit Stop Times
+
+![pitstop](https://github.com/gregoryhhan/formula1_capstone/blob/main/images/fastest_laptimes.png)
 
 ### App Creation
 
